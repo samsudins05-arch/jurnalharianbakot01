@@ -1,0 +1,6 @@
+{
+  "name": "Jurnal Sikawan Harian - SDN Babelan Kota 01",
+  "description": "Aplikasi Jurnal Sikawan Harian Tahun 2026 SDN Babelan Kota 01 dengan integrasi Google Spreadsheet & Drive via Google Apps Script (Code.gs dan Index.html), cetak lembar F4 resmi, dan manajemen guru.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

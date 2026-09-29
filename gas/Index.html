@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JURNAL HARIAN SIKAWAN 2026 - SDN BABELAN KOTA 01</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-dark: #0f172a;
+      --accent: #2563eb;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: var(--bg); color: var(--text); padding-bottom: 40px; }
+    
+    .app-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
+      color: white;
+      padding: 20px 24px;
+      box-shadow: 0 4px 20px rgba(30, 58, 138, 0.25);
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .brand-subtitle {
+      font-size: 13px;
+      opacity: 0.9;
+      color: #93c5fd;
+      margin-top: 3px;
+    }
+    
+    .main-container {
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .main-container { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card-header {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      border-bottom: 2px solid #eff6ff;
+      padding-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #334155; }
+    input, select, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      background: #ffffff;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1e40af, #2563eb);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.95; transform: translateY(-1px); }
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      padding: 8px 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    /* Pratinjau Dokumen F4 Folio */
+    .f4-sheet-preview {
+      background: white;
+      border: 1px solid #94a3b8;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      padding: 30px;
+      font-size: 12px;
+      line-height: 1.5;
+      position: sticky;
+      top: 20px;
+    }
+    .kop-surat {
+      text-align: center;
+      border-bottom: 3px double #000;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      font-family: 'Tinos', 'Times New Roman', serif;
+    }
+    .kop-surat h4 { font-size: 14px; font-weight: 700; letter-spacing: 0.5px; }
+    .kop-surat h3 { font-size: 16px; font-weight: 800; letter-spacing: 0.5px; margin: 2px 0; }
+    .kop-surat p { font-size: 11px; margin-top: 3px; }
+
+    .status-alert {
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .status-success { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; display: block; }
+    .status-loading { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; display: block; }
+    .status-error { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; display: block; }
+
+    @media print {
+      @page { size: 215mm 330mm; margin: 15mm; }
+      body { background: white; padding: 0; }
+      .app-header, .card, .btn-primary, .btn-secondary { display: none !important; }
+      .main-container { display: block; max-width: 100%; margin: 0; padding: 0; }
+      .f4-sheet-preview { border: none; box-shadow: none; padding: 0; width: 100%; position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-content">
+      <div>
+        <div class="brand-title">JURNAL HARIAN SIKAWAN</div>
+        <div class="brand-subtitle">SD NEGERI BABELAN KOTA 01 TAHUN 2026 - KABUPATEN BEKASI</div>
+      </div>
+      <div>
+        <button onclick="window.print()" class="btn-secondary" style="background: rgba(255,255,255,0.2); color: white; border: none; font-size: 13px; padding: 8px 14px;">
+          🖨️ Cetak Lembar F4
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <!-- Kolom Kiri: Form Input Jurnal -->
+    <div class="card">
+      <div class="card-header">
+        <span>Input Jurnal Harian Pegawai</span>
+      </div>
+      <div id="statusBox" class="status-alert"></div>
+      
+      <form id="jurnalForm">
+        <div class="form-group">
+          <label>Nama Pegawai / Guru</label>
+          <select id="pegawaiSelect" required>
+            <option value="">-- Memuat Guru / Tenaga Kependidikan --</option>
+          </select>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="form-group">
+            <label>Tanggal Pelaksanaan</label>
+            <input type="date" id="tanggal" required>
+          </div>
+          <div class="form-group">
+            <label>Hari</label>
+            <select id="hari">
+              <option>Senin</option><option>Selasa</option><option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="form-group">
+            <label>Jam Mulai</label>
+            <input type="time" id="jamMulai" value="07:00" required>
+          </div>
+          <div class="form-group">
+            <label>Jam Selesai</label>
+            <input type="time" id="jamSelesai" value="14:30" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Kategori Aktivitas</label>
+          <select id="kategori">
+            <option>Pelaksanaan Pembelajaran (KBM)</option>
+            <option>Penyusunan Perangkat / Modul Ajar</option>
+            <option>Penilaian & Evaluasi Asesmen</option>
+            <option>Bimbingan Siswa & Ekstrakurikuler</option>
+            <option>Tugas Tambahan / Kepanitiaan</option>
+            <option>Pengembangan Keprofesian (KKG/PMM)</option>
+            <option>Pelayanan Administrasi Sekolah</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Uraian Tugas Pokok / Kegiatan</label>
+          <textarea id="uraian" rows="3" placeholder="Deskripsikan aktivitas harian secara rinci..." required></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 10px;">
+          <div class="form-group">
+            <label>Output / Hasil Kerja</label>
+            <input type="text" id="output" placeholder="Contoh: Modul Ajar, Nilai Siswa" required>
+          </div>
+          <div class="form-group">
+            <label>Volume Output</label>
+            <input type="text" id="volumeOutput" value="1 Dokumen" placeholder="Contoh: 1 Dokumen, 32 Siswa">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Unggah Foto Dokumentasi (Otomatis simpan ke Drive)</label>
+          <input type="file" id="fotoFile" accept="image/*">
+        </div>
+
+        <button type="submit" class="btn-primary" id="btnSubmit">
+          Kirim & Simpan ke Spreadsheet & Drive
+        </button>
+      </form>
+    </div>
+
+    <!-- Kolom Kanan: Pratinjau Lembar F4 -->
+    <div class="f4-sheet-preview">
+      <div class="kop-surat">
+        <h4>PEMERINTAH KABUPATEN BEKASI</h4>
+        <h3>DINAS PENDIDIKAN</h3>
+        <h3>SD NEGERI BABELAN KOTA 01</h3>
+        <p>NPSN: 20218386 | Alamat: Jl. Raya Babelan No. 01, Kec. Babelan, Kab. Bekasi 17610</p>
+      </div>
+
+      <div style="text-align: center; margin-bottom: 16px;">
+        <strong style="text-decoration: underline; font-size: 13px;">LEMBAR JURNAL HARIAN SIKAWAN 2026</strong>
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 11.5px;">
+        <tr>
+          <td style="width: 140px; font-weight: 600; padding: 2px 0;">Nama Pegawai</td>
+          <td id="prevNama">: -</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; padding: 2px 0;">NIP / Golongan</td>
+          <td id="prevNip">: -</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; padding: 2px 0;">Jabatan / Unit</td>
+          <td id="prevJabatan">: Guru / SDN Babelan Kota 01</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; padding: 2px 0;">Hari / Tanggal</td>
+          <td id="prevTanggal">: -</td>
+        </tr>
+      </table>
+
+      <table border="1" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 11px;">
+        <thead style="background: #f1f5f9; text-align: center;">
+          <tr>
+            <th style="padding: 6px; width: 30px;">No</th>
+            <th style="padding: 6px; width: 85px;">Waktu</th>
+            <th style="padding: 6px;">Uraian Kegiatan</th>
+            <th style="padding: 6px; width: 120px;">Output & Volume</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center; padding: 8px; vertical-align: top;">1</td>
+            <td id="prevWaktu" style="text-align: center; padding: 8px; vertical-align: top;">07:00 - 14:30</td>
+            <td id="prevUraian" style="padding: 8px; vertical-align: top;">Silakan isi formulir di sisi kiri untuk melihat pratinjau dokumen F4 secara langsung.</td>
+            <td id="prevOutput" style="padding: 8px; vertical-align: top;">-</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Foto Dokumentasi Preview -->
+      <div id="prevFotoContainer" style="display: none; margin-top: 14px; text-align: center; border: 1px dashed #cbd5e1; padding: 8px;">
+        <div style="font-size: 10px; color: #64748b; margin-bottom: 4px;">Foto Dokumentasi Kegiatan:</div>
+        <img id="prevFotoImg" src="" style="max-height: 120px; border-radius: 4px; object-fit: contain;">
+      </div>
+
+      <div style="display: flex; justify-content: space-between; margin-top: 28px; text-align: center; font-size: 11px;">
+        <div>
+          Mengetahui,<br>
+          Kepala SD Negeri Babelan Kota 01<br><br><br><br>
+          <strong>Hj. Siti Rohmah, M.Pd.</strong><br>
+          NIP. 19720514 199603 2 002
+        </div>
+        <div>
+          Babelan, <span id="prevTtdTanggal">2026</span><br>
+          Pegawai yang Membuat,<br><br><br><br>
+          <strong id="prevSignNama">[Nama Pegawai]</strong><br>
+          <span id="prevSignNip">NIP. -</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Daftar Pegawai Default SDN Babelan Kota 01
+    const DEFAULT_PEGAWAI = [
+      { id: "peg-1", nama: "Dr. H. Samsudin, M.Pd.", nip: "196805121991031005", jabatan: "Guru Kelas VI", golongan: "Pembina Tk. I (IV/b)" },
+      { id: "peg-2", nama: "Dewi Ratnasari, S.Pd.SD", nip: "19890422 201402 2 003", jabatan: "Guru Kelas I", golongan: "Penata (III/c)" },
+      { id: "peg-3", nama: "Ahmad Fauzi, S.Pd.I", nip: "19871115 201101 1 008", jabatan: "Guru PAI & BP", golongan: "Penata Tk. I (III/d)" },
+      { id: "peg-4", nama: "Rina Wijayanti, S.Pd.", nip: "19920803 201903 2 011", jabatan: "Guru Kelas IV", golongan: "Penata Muda Tk. I (III/b)" },
+      { id: "peg-5", nama: "Bambang Supriyadi, S.Pd.", nip: "19860105 201503 1 004", jabatan: "Guru PJOK", golongan: "Penata (III/c)" },
+      { id: "peg-6", nama: "Nur Azizah, S.Kom", nip: "-", jabatan: "Operator & Tenaga Administrasi", golongan: "Tenaga Kependidikan" }
+    ];
+
+    let pegawaiList = DEFAULT_PEGAWAI;
+
+    // Set Default Tanggal Hari Ini
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    document.getElementById('tanggal').value = `${yyyy}-${mm}-${dd}`;
+    
+    const hariArr = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    document.getElementById('hari').value = hariArr[today.getDay()] || 'Senin';
+
+    // Inisialisasi dropdown pegawai
+    function renderPegawaiDropdown() {
+      const select = document.getElementById('pegawaiSelect');
+      select.innerHTML = '<option value="">-- Pilih Guru / Tenaga Kependidikan --</option>';
+      pegawaiList.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = `${p.nama} (${p.jabatan})`;
+        opt.dataset.nip = p.nip;
+        opt.dataset.golongan = p.golongan;
+        opt.dataset.jabatan = p.jabatan;
+        select.appendChild(opt);
+      });
+      if (pegawaiList.length > 0) {
+        select.selectedIndex = 1;
+        updatePreview();
+      }
+    }
+
+    // Ambil data pegawai dari GAS jika tersedia
+    if (typeof google !== 'undefined' && google.script && google.script.run) {
+      google.script.run
+        .withSuccessHandler(function(data) {
+          if (Array.isArray(data) && data.length > 0) {
+            pegawaiList = data;
+          }
+          renderPegawaiDropdown();
+        })
+        .withFailureHandler(function() {
+          renderPegawaiDropdown();
+        })
+        .getPegawaiList();
+    } else {
+      renderPegawaiDropdown();
+    }
+
+    // Live update preview
+    document.getElementById('jurnalForm').addEventListener('input', updatePreview);
+    document.getElementById('pegawaiSelect').addEventListener('change', updatePreview);
+    document.getElementById('tanggal').addEventListener('change', function() {
+      const d = new Date(this.value);
+      if (!isNaN(d.getTime())) {
+        document.getElementById('hari').value = hariArr[d.getDay()] || 'Senin';
+      }
+      updatePreview();
+    });
+
+    // Preview foto yang dipilih
+    document.getElementById('fotoFile').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById('prevFotoImg').src = evt.target.result;
+          document.getElementById('prevFotoContainer').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        document.getElementById('prevFotoContainer').style.display = 'none';
+      }
+    });
+
+    function updatePreview() {
+      const select = document.getElementById('pegawaiSelect');
+      const selectedOpt = select.options[select.selectedIndex];
+      const pNama = selectedOpt && selectedOpt.value ? selectedOpt.textContent.split(' (')[0] : '-';
+      const pNip = selectedOpt ? (selectedOpt.dataset.nip || '-') : '-';
+      const pGol = selectedOpt ? (selectedOpt.dataset.golongan || '-') : '-';
+      const pJab = selectedOpt ? (selectedOpt.dataset.jabatan || 'Guru SDN Babelan Kota 01') : 'Guru SDN Babelan Kota 01';
+
+      document.getElementById('prevNama').textContent = ': ' + pNama;
+      document.getElementById('prevNip').textContent = ': ' + pNip + ' / ' + pGol;
+      document.getElementById('prevJabatan').textContent = ': ' + pJab + ' / SDN Babelan Kota 01';
+      document.getElementById('prevSignNama').textContent = pNama !== '-' ? pNama : '[Nama Pegawai]';
+      document.getElementById('prevSignNip').textContent = 'NIP. ' + pNip;
+
+      const tglVal = document.getElementById('tanggal').value;
+      const hariVal = document.getElementById('hari').value;
+      document.getElementById('prevTanggal').textContent = ': ' + hariVal + ', ' + tglVal;
+      document.getElementById('prevTtdTanggal').textContent = tglVal ? formatTanggalIndo(tglVal) : '2026';
+
+      document.getElementById('prevWaktu').textContent = document.getElementById('jamMulai').value + ' - ' + document.getElementById('jamSelesai').value;
+      document.getElementById('prevUraian').textContent = document.getElementById('uraian').value || '...';
+
+      const vol = document.getElementById('volumeOutput').value;
+      const out = document.getElementById('output').value;
+      document.getElementById('prevOutput').textContent = (out ? out : '-') + (vol ? ' (' + vol + ')' : '');
+    }
+
+    function formatTanggalIndo(str) {
+      const bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+      const parts = str.split('-');
+      if (parts.length === 3) {
+        return parseInt(parts[2], 10) + ' ' + bulan[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+      }
+      return str;
+    }
+
+    // Submit handler
+    document.getElementById('jurnalForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const statusBox = document.getElementById('statusBox');
+      const btnSubmit = document.getElementById('btnSubmit');
+
+      statusBox.className = 'status-alert status-loading';
+      statusBox.textContent = 'Menyimpan data ke Spreadsheet & mengunggah foto ke Google Drive...';
+      btnSubmit.disabled = true;
+
+      const fileInput = document.getElementById('fotoFile');
+      if (fileInput.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          sendData(evt.target.result);
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        sendData('');
+      }
+    });
+
+    function sendData(fotoBase64) {
+      const select = document.getElementById('pegawaiSelect');
+      const selectedOpt = select.options[select.selectedIndex];
+      const pNama = selectedOpt ? selectedOpt.textContent.split(' (')[0] : '';
+
+      const payload = {
+        action: 'simpanJurnal',
+        pegawaiId: select.value || 'peg-1',
+        pegawaiNama: pNama,
+        tanggal: document.getElementById('tanggal').value,
+        hari: document.getElementById('hari').value,
+        jamMulai: document.getElementById('jamMulai').value,
+        jamSelesai: document.getElementById('jamSelesai').value,
+        kategori: document.getElementById('kategori').value,
+        uraianKegiatan: document.getElementById('uraian').value,
+        outputHasil: document.getElementById('output').value,
+        volumeOutput: document.getElementById('volumeOutput').value || '1 Dokumen',
+        fotoDokumentasiBase64: fotoBase64
+      };
+
+      const btnSubmit = document.getElementById('btnSubmit');
+
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        google.script.run
+          .withSuccessHandler(function(res) {
+            btnSubmit.disabled = false;
+            const statusBox = document.getElementById('statusBox');
+            statusBox.className = 'status-alert status-success';
+            statusBox.textContent = 'Berhasil! Jurnal telah tersimpan ke Google Sheets & Foto tersimpan ke Google Drive.';
+          })
+          .withFailureHandler(function(err) {
+            btnSubmit.disabled = false;
+            const statusBox = document.getElementById('statusBox');
+            statusBox.className = 'status-alert status-error';
+            statusBox.textContent = 'Gagal menyimpan: ' + err.toString();
+          })
+          .simpanJurnal(payload);
+      } else {
+        // Fallback demo mode
+        setTimeout(function() {
+          btnSubmit.disabled = false;
+          const statusBox = document.getElementById('statusBox');
+          statusBox.className = 'status-alert status-success';
+          statusBox.textContent = 'Simulasi Tersimpan! Jurnal berhasil disiapkan. Jika dijalankan di Google Apps Script, data langsung masuk ke Google Sheet & Drive.';
+        }, 1200);
+      }
+    }
+  </script>
+</body>
+</html>
